@@ -1,13 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
 @Component({
   selector: 'app-cadastrar-clientes',
-  imports: [],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './cadastrar-clientes.html',
   styleUrl: './cadastrar-clientes.css',
 })
 export class CadastrarClientes {
+
+  // Atributo para armazenar os dados vindos da conulta da API
+  niveisCliente = signal<any[]>([]);
 
   // Instanciar a classe HTTPCLIENT
   http = inject(HttpClient);
@@ -20,7 +26,8 @@ export class CadastrarClientes {
       this.http.get('http://localhost:5166/api/v1/Enum/niveis-cliente')
       .subscribe((data) => {
 
-        console.log('Opções do enum de níveis de cliente:', data);
+        //Armazenar os dados da API na variavel signal
+        this.niveisCliente.set(data as any[]);
       });
   }
 

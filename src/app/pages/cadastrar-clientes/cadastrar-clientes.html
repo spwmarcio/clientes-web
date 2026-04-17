@@ -39,7 +39,12 @@
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Nível</label>
                     <select class="form-select">
-                        <option selected disabled>Selecione o nível</option>
+                        <option value="">Selecione o nível</option>
+                        @for (item of niveisCliente(); track item.id) {
+                          <option value="{{ item.id }}">
+                            {{ item.nome }}
+                          </option>>
+                        } 
                     </select>
                 </div>
 
